@@ -1,0 +1,595 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Fridge master test task",
+        "description": "Fridge master test task",
+        "contact": {
+            "email": "admin@admin.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login",
+                "operationId": "936bb9225545db2770e3df871962eca3",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "test@gmail.com",
+                                    "password": "password"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "result": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "user": {
+                                                "id": 1,
+                                                "name": "Dario Hills PhD",
+                                                "email": "test@gmail.com",
+                                                "email_verified_at": "2022-06-23T19:39:04.000000Z",
+                                                "created_at": "2022-06-23T19:39:04.000000Z",
+                                                "updated_at": "2022-06-23T19:39:04.000000Z"
+                                            },
+                                            "token": "2|NGDvenGJRVcfzJV8HmTrjTGzOUkFycEibKR2wAWl"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "delete": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout",
+                "description": "Logout user",
+                "operationId": "logoutUser",
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/user": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get user profile",
+                "description": "Returns user profile",
+                "operationId": "getUserProfile",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Update user data",
+                "description": "Returns updated user data",
+                "operationId": "updateUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "test@gmail.com",
+                                    "name": "testName",
+                                    "password": "password"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "result": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "user": {
+                                                "id": 1,
+                                                "name": "Dario Hills PhD",
+                                                "email": "test@gmail.com",
+                                                "email_verified_at": "2022-06-23T19:39:04.000000Z",
+                                                "created_at": "2022-06-23T19:39:04.000000Z",
+                                                "updated_at": "2022-06-23T19:39:04.000000Z"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/locations": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Get list of locations",
+                "description": "Returns list of locations",
+                "operationId": "getLocations",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "data": {
+                                                "name": "Шанхай"
+                                            },
+                                            "0": {
+                                                "name": "Валенсия"
+                                            },
+                                            "1": {
+                                                "name": "Торонто"
+                                            },
+                                            "2": {
+                                                "name": "Портленд (Орегон)"
+                                            },
+                                            "3": {
+                                                "name": "Варшава"
+                                            },
+                                            "4": {
+                                                "name": "Уилмингтон (Северная Каролина)"
+                                            },
+                                            "links": {
+                                                "first": "http:\\/\\/127.0.0.1:8000\\/api\\/locations?page=1",
+                                                "last": "http:\\/\\/127.0.0.1:8000\\/api\\/locations?page=1",
+                                                "prev": null,
+                                                "next": null
+                                            },
+                                            "meta": {
+                                                "current_page": 1,
+                                                "from": 1,
+                                                "last_page": 1,
+                                                "links": {
+                                                    "url": null,
+                                                    "label": "« Previous",
+                                                    "active": false
+                                                },
+                                                "0": {
+                                                    "url": "http:\\/\\/127.0.0.1:8000\\/api\\/locations?page=1",
+                                                    "label": "1",
+                                                    "active": true
+                                                },
+                                                "1": {
+                                                    "url": null,
+                                                    "label": "Next »",
+                                                    "active": false
+                                                },
+                                                "path": "http:\\/\\/127.0.0.1:8000\\/api\\/locations",
+                                                "per_page": 15,
+                                                "to": 6,
+                                                "total": 6
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get list of user orders",
+                "description": "Returns list of user orders",
+                "operationId": "getUserOrdersList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "data": {
+                                                "id": 1,
+                                                "uid": "rQa651SKNspQ",
+                                                "status": "booked",
+                                                "price": 260,
+                                                "used_blocks": "[1,2,3,4,5,6,7,8,9,10,11,12,13]",
+                                                "user_id": 1,
+                                                "created_at": "2022-06-23T21:11:10.000000Z",
+                                                "updated_at": "2022-06-23T21:11:10.000000Z"
+                                            },
+                                            "links": {
+                                                "first": "http:\\/\\/127.0.0.1:8000\\/api\\/orders?page=1",
+                                                "last": "http:\\/\\/127.0.0.1:8000\\/api\\/orders?page=1",
+                                                "prev": null,
+                                                "next": null
+                                            },
+                                            "meta": {
+                                                "current_page": 1,
+                                                "from": 1,
+                                                "last_page": 1,
+                                                "links": {
+                                                    "url": null,
+                                                    "label": "&laquo; Previous",
+                                                    "active": false
+                                                },
+                                                "0": {
+                                                    "url": "http:\\/\\/127.0.0.1:8000\\/api\\/orders?page=1",
+                                                    "label": "1",
+                                                    "active": true
+                                                },
+                                                "1": {
+                                                    "url": null,
+                                                    "label": "Next &raquo;",
+                                                    "active": false
+                                                },
+                                                "path": "http:\\/\\/127.0.0.1:8000\\/api\\/orders",
+                                                "per_page": 15,
+                                                "to": 1,
+                                                "total": 1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Create an orders",
+                "operationId": "445bab4f7dc9ea6fcd54f286c0209478",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "location_id": {
+                                        "type": "integer"
+                                    },
+                                    "num_of_days": {
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "type": "decimal"
+                                    },
+                                    "used_blocks": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "location_id": 1,
+                                    "num_of_days": 10,
+                                    "price": 260,
+                                    "used_blocks": "[1,2,3,4,5,6,7,8,9,10,11,12,13]"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/orders/calculatePrice": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Calculate price",
+                "operationId": "8e4e22521f9f1e734a641c70ce6faeff",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "location_id": {
+                                        "type": "integer"
+                                    },
+                                    "capacity": {
+                                        "type": "integer"
+                                    },
+                                    "temp": {
+                                        "type": "integer"
+                                    },
+                                    "num_of_days": {
+                                        "type": "decimal"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "location_id": 1,
+                                    "capacity": 25,
+                                    "temp": -1,
+                                    "num_of_days": 10
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "num_of_blocks": {
+                                            "type": "integet"
+                                        },
+                                        "location_id": {
+                                            "type": "integer"
+                                        },
+                                        "used_blocks": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "num_of_days": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "price": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "decimal"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "result": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "num_of_blocks": 13,
+                                            "location_id": "1",
+                                            "used_blocks": "[14,15,16,17,18,19,20,21,22,23,24,25,26]",
+                                            "num_of_days": "10",
+                                            "price": 260
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get order information",
+                "description": "Returns order data",
+                "operationId": "getOrderById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "order id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "data": {
+                                                "id": 1,
+                                                "uid": "rQa651SKNspQ",
+                                                "status": "booked",
+                                                "price": 260,
+                                                "used_blocks": "[1,2,3,4,5,6,7,8,9,10,11,12,13]",
+                                                "user_id": 1,
+                                                "created_at": "2022-06-23T21:11:10.000000Z",
+                                                "updated_at": "2022-06-23T21:11:10.000000Z"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        }
+    }
+}
